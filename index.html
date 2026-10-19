@@ -704,8 +704,8 @@
             
             <div class="form-grid">
               <div class="form-group">
-                <label for="fullname" data-i18n="label_name">Full name *</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <label for="name" data-i18n="label_name">Name *</label>
+                <input type="text" id="name" name="name" required>
                 <span class="error-message" id="err-name" data-i18n="err_required">This field is required.</span>
               </div>
               <div class="form-group">
@@ -717,8 +717,6 @@
                 <label for="contactMethod" data-i18n="label_contact_method">Preferred contact method</label>
                 <select id="contactMethod" name="contactMethod">
                   <option value="email" data-i18n="opt_email">Email</option>
-                  <option value="phone" data-i18n="opt_phone">Phone</option>
-                  <option value="whatsapp" data-i18n="opt_whatsapp">WhatsApp</option>
                   <option value="telegram" data-i18n="opt_telegram">Telegram</option>
                   <option value="tiktok" data-i18n="opt_tiktok">TikTok</option>
                 </select>
@@ -946,12 +944,10 @@
         build8: 'Booking websites',
         custom_note: 'Have a different idea? Tell me about it. Let\'s discuss what we can build.',
         booking_title: 'Book Your Project',
-        label_name: 'Full name *',
+        label_name: 'Name *',
         label_email: 'Email address *',
         label_contact_method: 'Preferred contact method',
         opt_email: 'Email',
-        opt_phone: 'Phone',
-        opt_whatsapp: 'WhatsApp',
         opt_telegram: 'Telegram',
         opt_tiktok: 'TikTok',
         label_project_type: 'Project type',
@@ -1032,12 +1028,10 @@
         build8: 'مواقع الحجز',
         custom_note: 'لديك فكرة مختلفة؟ أخبرني عنها. لنناقش ما يمكننا بناؤه.',
         booking_title: 'احجز مشروعك',
-        label_name: 'الاسم الكامل *',
+        label_name: 'الاسم *',
         label_email: 'البريد الإلكتروني *',
         label_contact_method: 'طريقة الاتصال المفضلة',
         opt_email: 'البريد الإلكتروني',
-        opt_phone: 'الهاتف',
-        opt_whatsapp: 'واتساب',
         opt_telegram: 'تيليجرام',
         opt_tiktok: 'تيك توك',
         label_project_type: 'نوع المشروع',
@@ -1116,7 +1110,7 @@
 
     function validateForm() {
       let isValid = true;
-      const name = document.getElementById('fullname').value.trim();
+      const name = document.getElementById('name').value.trim();
       if (!name) { errName.style.display = 'block'; isValid = false; } else { errName.style.display = 'none'; }
       
       const email = document.getElementById('email').value.trim();
@@ -1131,9 +1125,9 @@
       return isValid;
     }
 
-    ['fullname', 'email', 'description'].forEach(id => {
+    ['name', 'email', 'description'].forEach(id => {
       document.getElementById(id).addEventListener('input', function() {
-        const errId = 'err-' + (id === 'fullname' ? 'name' : id === 'email' ? 'email' : 'desc');
+        const errId = 'err-' + (id === 'name' ? 'name' : id === 'email' ? 'email' : 'desc');
         const errEl = document.getElementById(errId);
         if (errEl) errEl.style.display = 'none';
       });
