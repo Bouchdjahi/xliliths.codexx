@@ -709,14 +709,13 @@
                 <span class="error-message" id="err-name" data-i18n="err_required">This field is required.</span>
               </div>
               <div class="form-group">
-                <label for="email" data-i18n="label_email">Email address *</label>
-                <input type="email" id="email" name="email" required>
-                <span class="error-message" id="err-email" data-i18n="err_email">Valid email required.</span>
+                <label for="telegram" data-i18n="label_telegram">Telegram Username *</label>
+                <input type="text" id="telegram" name="telegram" placeholder="@username" required>
+                <span class="error-message" id="err-telegram" data-i18n="err_required">This field is required.</span>
               </div>
               <div class="form-group">
                 <label for="contactMethod" data-i18n="label_contact_method">Preferred contact method</label>
                 <select id="contactMethod" name="contactMethod">
-                  <option value="email" data-i18n="opt_email">Email</option>
                   <option value="telegram" data-i18n="opt_telegram">Telegram</option>
                   <option value="tiktok" data-i18n="opt_tiktok">TikTok</option>
                 </select>
@@ -945,9 +944,8 @@
         custom_note: 'Have a different idea? Tell me about it. Let\'s discuss what we can build.',
         booking_title: 'Book Your Project',
         label_name: 'Name *',
-        label_email: 'Email address *',
+        label_telegram: 'Telegram Username *',
         label_contact_method: 'Preferred contact method',
-        opt_email: 'Email',
         opt_telegram: 'Telegram',
         opt_tiktok: 'TikTok',
         label_project_type: 'Project type',
@@ -973,7 +971,6 @@
         label_checkbox: 'I understand that the displayed prices are starting estimates and the final price will be confirmed after reviewing my project details.',
         btn_submit: 'Submit Project Request',
         err_required: 'This field is required.',
-        err_email: 'Valid email required.',
         err_checkbox: 'You must confirm the price estimate note.',
         payment_title: 'Payment Methods',
         payment_desc: 'Multiple payment methods are available. Payment details and instructions will be provided after the project requirements and price have been confirmed.',
@@ -1029,9 +1026,8 @@
         custom_note: 'لديك فكرة مختلفة؟ أخبرني عنها. لنناقش ما يمكننا بناؤه.',
         booking_title: 'احجز مشروعك',
         label_name: 'الاسم *',
-        label_email: 'البريد الإلكتروني *',
+        label_telegram: 'اسم المستخدم في تيليجرام *',
         label_contact_method: 'طريقة الاتصال المفضلة',
-        opt_email: 'البريد الإلكتروني',
         opt_telegram: 'تيليجرام',
         opt_tiktok: 'تيك توك',
         label_project_type: 'نوع المشروع',
@@ -1057,7 +1053,6 @@
         label_checkbox: 'أفهم أن الأسعار المعروضة تقديرية للبداية وسيتم تأكيد السعر النهائي بعد مراجعة تفاصيل مشروعي.',
         btn_submit: 'إرسال طلب المشروع',
         err_required: 'هذا الحقل مطلوب.',
-        err_email: 'البريد الإلكتروني غير صالح.',
         err_checkbox: 'يجب تأكيد ملاحظة تقدير السعر.',
         payment_title: 'طرق الدفع',
         payment_desc: 'تتوفر طرق دفع متعددة. سيتم توفير تفاصيل الدفع والتعليمات بعد تأكيد متطلبات المشروع والسعر.',
@@ -1103,7 +1098,7 @@
     const form = document.getElementById('bookingForm');
     const formStatus = document.getElementById('formStatus');
     const errName = document.getElementById('err-name');
-    const errEmail = document.getElementById('err-email');
+    const errTelegram = document.getElementById('err-telegram');
     const errDesc = document.getElementById('err-desc');
     const errCheckbox = document.getElementById('err-checkbox');
     const priceConfirm = document.getElementById('priceConfirm');
@@ -1113,9 +1108,8 @@
       const name = document.getElementById('name').value.trim();
       if (!name) { errName.style.display = 'block'; isValid = false; } else { errName.style.display = 'none'; }
       
-      const email = document.getElementById('email').value.trim();
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email || !emailRegex.test(email)) { errEmail.style.display = 'block'; isValid = false; } else { errEmail.style.display = 'none'; }
+      const telegram = document.getElementById('telegram').value.trim();
+      if (!telegram) { errTelegram.style.display = 'block'; isValid = false; } else { errTelegram.style.display = 'none'; }
       
       const desc = document.getElementById('description').value.trim();
       if (!desc) { errDesc.style.display = 'block'; isValid = false; } else { errDesc.style.display = 'none'; }
@@ -1125,9 +1119,9 @@
       return isValid;
     }
 
-    ['name', 'email', 'description'].forEach(id => {
+    ['name', 'telegram', 'description'].forEach(id => {
       document.getElementById(id).addEventListener('input', function() {
-        const errId = 'err-' + (id === 'name' ? 'name' : id === 'email' ? 'email' : 'desc');
+        let errId = 'err-' + (id === 'name' ? 'name' : id === 'telegram' ? 'telegram' : 'desc');
         const errEl = document.getElementById(errId);
         if (errEl) errEl.style.display = 'none';
       });
